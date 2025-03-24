@@ -9,7 +9,7 @@ import time
 # Streamlit page configuration
 st.set_page_config(page_title="Trading Strategy Dashboard", layout="wide")
 
-# Dark Mode CSS
+# Dark Mode CSS with Branding Styles
 st.markdown("""
     <style>
     /* Global Dark Mode Styles */
@@ -97,8 +97,33 @@ st.markdown("""
         background-color: #333333;
         color: #E0E0E0;
     }
+    /* Branding Styles */
+    .top-branding {
+        font-size: 1.2em;
+        color: #BB86FC;
+        font-weight: 500;
+        margin-bottom: 10px;
+    }
+    .sidebar-branding {
+        display: flex;
+        align-items: center;
+        margin-top: 20px;
+        font-size: 0.9em;
+        color: #A0A0A0;
+    }
+    .sidebar-branding a {
+        margin-left: 8px;
+    }
+    .sidebar-branding img {
+        width: 24px;
+        height: 24px;
+        vertical-align: middle;
+    }
     </style>
 """, unsafe_allow_html=True)
+
+# Top Left Branding
+st.markdown('<div class="top-branding">Syed Sharjeel Jafri</div>', unsafe_allow_html=True)
 
 # Title and description
 st.title("📈 Trading Strategy Dashboard")
@@ -123,6 +148,19 @@ with st.sidebar:
     
     st.subheader("Trading Mode")
     position_mode = st.radio("Position Mode", ["Flip on Signal", "Hold Until Exit"], help="Choose how positions are managed based on signals")
+    
+    # Sidebar Branding with LinkedIn Logo
+    st.markdown(
+        """
+        <div class="sidebar-branding">
+            Created by Syed Sharjeel Jafri
+            <a href="https://www.linkedin.com/in/syed-sharjeel-jafri" target="_blank">
+                <img src="https://content.linkedin.com/content/dam/me/business/en-us/amp/brand-site/v2/bg/LI-Bug.svg.original.svg" alt="LinkedIn">
+            </a>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
     
     run_button = st.button("Run Analysis")
 
@@ -248,7 +286,7 @@ def main():
             return
     
     if data.empty:
-        st.error(f"No data available for {ticker}. 请检查股票代码或日期范围。")
+        st.error(f"No data available for {ticker}. Please check the ticker or date range.")
         return
     
     st.success(f"Data loaded successfully! Rows: {len(data)}")
